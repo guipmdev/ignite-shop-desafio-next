@@ -1,15 +1,29 @@
 import 'keen-slider/keen-slider.min.css'
 
-import { useKeenSlider } from 'keen-slider/react'
-import { GetServerSideProps } from 'next'
+import axios from 'axios'
+import { KeenSliderPlugin, useKeenSlider } from 'keen-slider/react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import Stripe from 'stripe'
+import { useCallback, useEffect, useState } from 'react'
 
 import Slide from '../components/Slide'
-import { stripe } from '../lib/stripe'
 import { HomeContainer } from '../styles/pages/home'
+
+const MutationPlugin: KeenSliderPlugin = (slider) => {
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      slider.update()
+    })
+  })
+  const config = { childList: true }
+
+  slider.on('created', () => {
+    observer.observe(slider.container, config)
+  })
+  slider.on('destroyed', () => {
+    observer.disconnect()
+  })
+}
 
 export interface Product {
   id: string
@@ -18,21 +32,21 @@ export interface Product {
   price: string
 }
 
-interface HomeProps {
-  products: Product[]
-}
+export default function Home() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [products, setProducts] = useState<Product[]>([])
 
-export default function Home({ products }: HomeProps) {
-  const router = useRouter()
-
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 1.75,
-      spacing: 48,
+  const [sliderRef] = useKeenSlider(
+    {
+      slides: {
+        perView: 1.75,
+        spacing: 48,
+      },
     },
-  })
+    [MutationPlugin],
+  )
 
-  const slides = router.isFallback
+  const slides = isLoading
     ? [1, 2, 3].map((number) => {
         return <Slide key={number} />
       })
@@ -48,6 +62,19 @@ export default function Home({ products }: HomeProps) {
         )
       })
 
+  const readProducts = useCallback(async () => {
+    setIsLoading(true)
+    const response = await axios.get('/api/products')
+
+    setProducts(response.data)
+
+    setIsLoading(false)
+  }, [])
+
+  useEffect(() => {
+    readProducts()
+  }, [readProducts])
+
   return (
     <>
       <Head>
@@ -59,30 +86,4 @@ export default function Home({ products }: HomeProps) {
       </HomeContainer>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await stripe.products.list({
-    expand: ['data.default_price'],
-  })
-
-  const products = response.data.map((product) => {
-    const price = product.default_price as Stripe.Price
-
-    return {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(price.unit_amount! / 100),
-    }
-  })
-
-  return {
-    props: {
-      products,
-    },
-  }
 }
