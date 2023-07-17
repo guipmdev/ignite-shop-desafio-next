@@ -20,6 +20,9 @@ export const {
 
       green500: '#00875f',
       green300: '#00b37e',
+
+      red500: '#cc575f',
+      red300: '#ff575f',
     },
 
     fontSizes: {

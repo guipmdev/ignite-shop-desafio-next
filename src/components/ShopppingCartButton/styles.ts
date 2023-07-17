@@ -51,5 +51,17 @@ export const ShoppingCartButtonContainer = styled('button', {
         color: '#8D8D99',
       },
     },
+
+    removeButton: {
+      true: {
+        background: '$red500',
+
+        color: '$white',
+
+        '&:hover': {
+          background: '$red300',
+        },
+      },
+    },
   },
 })

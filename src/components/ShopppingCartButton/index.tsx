@@ -6,18 +6,24 @@ interface ShoppingCartButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: number
   backgroundColor?: 'gray'
-  hasCounter?: boolean
+  counter?: number
+  removeButton?: boolean
 }
 
 export default function ShoppingCartButton({
   size,
   backgroundColor,
-  hasCounter,
+  counter,
+  removeButton,
   ...rest
 }: ShoppingCartButtonProps) {
   return (
-    <ShoppingCartButtonContainer backgroundColor={backgroundColor} {...rest}>
-      {hasCounter && <span>1</span>}
+    <ShoppingCartButtonContainer
+      backgroundColor={backgroundColor}
+      removeButton={removeButton}
+      {...rest}
+    >
+      {!!counter && <span>{counter}</span>}
       <Handbag weight="bold" size={size || 32} />
     </ShoppingCartButtonContainer>
   )

@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { MouseEvent } from 'react'
+import { useShoppingCart } from 'use-shopping-cart'
 
 import { ProductType } from '../../pages'
 import ShoppingCartButton from '../ShopppingCartButton'
@@ -9,27 +11,54 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { removeItem, addItem, cartDetails } = useShoppingCart()
+
   const isPlaceholder = !product
 
-  return isPlaceholder ? (
-    <PlaceholderContainer className="keen-slider__slide">
-      <div className="image"></div>
-      <footer>
-        <div className="title"></div>
-        <div className="price"></div>
-      </footer>
-    </PlaceholderContainer>
-  ) : (
+  if (isPlaceholder) {
+    return (
+      <PlaceholderContainer className="keen-slider__slide">
+        <div className="image"></div>
+        <footer>
+          <div className="title"></div>
+          <div className="price"></div>
+        </footer>
+      </PlaceholderContainer>
+    )
+  }
+
+  const productAlreadyInCart =
+    !!cartDetails && Object.keys(cartDetails).includes(product.id)
+
+  function handleModifyItemOnCart(event: MouseEvent<HTMLElement>) {
+    event.preventDefault()
+
+    if (productAlreadyInCart) {
+      removeItem(product!.id)
+    } else {
+      addItem(product!)
+    }
+  }
+
+  return (
     <ProductContainer className="keen-slider__slide">
       <Image src={product.imageUrl} width={520} height={480} alt="" />
 
       <footer>
         <div>
           <strong>{product.name}</strong>
-          <span>{product.price}</span>
+          <span>
+            {new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(product.price / 100)}
+          </span>
         </div>
 
-        <ShoppingCartButton />
+        <ShoppingCartButton
+          onClick={handleModifyItemOnCart}
+          removeButton={productAlreadyInCart}
+        />
       </footer>
     </ProductContainer>
   )
