@@ -85,6 +85,10 @@ export default function Home() {
         )
       })
 
+  function handleSlideChange(action: 'prev' | 'next') {
+    instanceRef.current?.[action]()
+  }
+
   const readProducts = useCallback(async () => {
     setIsLoading(true)
     const response = await axios.get('/api/products')
@@ -113,13 +117,13 @@ export default function Home() {
               className="right"
               hidden={currentSlide === totalSlides - 1}
             >
-              <button>
+              <button onClick={() => handleSlideChange('next')}>
                 <CaretRight size={48} />
               </button>
             </SliderController>
 
             <SliderController className="left" hidden={currentSlide === 0}>
-              <button>
+              <button onClick={() => handleSlideChange('prev')}>
                 <CaretLeft size={48} />
               </button>
             </SliderController>
