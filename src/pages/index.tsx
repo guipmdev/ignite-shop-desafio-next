@@ -2,31 +2,14 @@ import 'keen-slider/keen-slider.min.css'
 
 import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import axios from 'axios'
-import { KeenSliderPlugin, useKeenSlider } from 'keen-slider/react'
+import { useKeenSlider } from 'keen-slider/react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
 import Slide from '../components/Slide'
+import { MutationPlugin } from '../lib/keen-slider'
 import { HomeContainer, SliderController } from '../styles/pages/home'
-
-const MutationPlugin: KeenSliderPlugin = (slider) => {
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      slider.update()
-    })
-  })
-
-  const config = { childList: true }
-
-  slider.on('created', () => {
-    observer.observe(slider.container, config)
-  })
-
-  slider.on('destroyed', () => {
-    observer.disconnect()
-  })
-}
 
 export interface Product {
   id: string
@@ -37,10 +20,12 @@ export interface Product {
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
-  const [loaded, setLoaded] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [totalSlides, setTotalSlides] = useState(0)
+
   const [products, setProducts] = useState<Product[]>([])
+
+  const [loaded, setLoaded] = useState(false)
+  const [totalSlides, setTotalSlides] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const [sliderRef, instanceRef] = useKeenSlider(
     {
@@ -85,14 +70,10 @@ export default function Home() {
         )
       })
 
-  function handleSlideChange(action: 'prev' | 'next') {
-    instanceRef.current?.[action]()
-  }
-
   const readProducts = useCallback(async () => {
     setIsLoading(true)
-    const response = await axios.get('/api/products')
 
+    const response = await axios.get('/api/products')
     setProducts(response.data)
 
     setIsLoading(false)
@@ -101,6 +82,10 @@ export default function Home() {
   useEffect(() => {
     readProducts()
   }, [readProducts])
+
+  function handleSlideChange(action: 'prev' | 'next') {
+    instanceRef.current?.[action]()
+  }
 
   return (
     <>
