@@ -54,29 +54,37 @@ export const ProductDetails = styled('div', {
     fontSize: '$md',
     lineHeight: 1.6,
   },
+})
 
-  button: {
-    background: '$green500',
+export const ShoppingCartButton = styled('button', {
+  background: '$green500',
 
-    padding: '1.25rem',
-    border: 0,
-    borderRadius: 8,
-    marginTop: 'auto',
+  padding: '1.25rem',
+  border: 0,
+  borderRadius: 8,
+  marginTop: 'auto',
 
-    color: '$white',
-    fontSize: '$md',
-    fontWeight: 'bold',
+  color: '$white',
+  fontSize: '$md',
+  fontWeight: 'bold',
 
-    cursor: 'pointer',
+  cursor: 'pointer',
 
-    '&:disabled': {
-      opacity: 0.6,
+  '&:hover': {
+    background: '$green300',
+  },
 
-      cursor: 'not-allowed',
-    },
+  variants: {
+    removeButton: {
+      true: {
+        background: '$red500',
 
-    '&:not(:disabled):hover': {
-      background: '$green300',
+        color: '$white',
+
+        '&:hover': {
+          background: '$red300',
+        },
+      },
     },
   },
 })

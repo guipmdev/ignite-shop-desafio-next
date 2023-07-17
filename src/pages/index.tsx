@@ -14,7 +14,9 @@ import { HomeContainer } from '../styles/pages/home'
 export interface ProductType {
   id: string
   name: string
+  description: string
   imageUrl: string
+  defaultPriceId: string
   price: number
   currency: string
 }

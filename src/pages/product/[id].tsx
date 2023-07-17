@@ -2,28 +2,26 @@ import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import Stripe from 'stripe'
+import { useShoppingCart } from 'use-shopping-cart'
 
 import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
   ProductContainer,
   ProductDetails,
+  ShoppingCartButton,
 } from '../../styles/pages/product'
+import { ProductType } from '..'
 
 interface ProductProps {
-  product: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-    description: string
-    defaultPriceId: string
-  }
+  product: ProductType
 }
 
 export default function Product({ product }: ProductProps) {
+  const { cartDetails, removeItem, addItem } = useShoppingCart()
+
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
@@ -47,6 +45,19 @@ export default function Product({ product }: ProductProps) {
     }
   }
 
+  const productAlreadyInCart =
+    !!cartDetails && Object.keys(cartDetails).includes(product.id)
+
+  function handleModifyItemOnCart(event: MouseEvent<HTMLElement>) {
+    event.preventDefault()
+
+    if (productAlreadyInCart) {
+      removeItem(product!.id)
+    } else {
+      addItem(product!)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -60,16 +71,22 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>
+            {new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(product.price! / 100)}
+          </span>
 
           <p>{product.description}</p>
 
-          <button
+          <ShoppingCartButton
             disabled={isCreatingCheckoutSession}
-            onClick={handleBuyProduct}
+            onClick={handleModifyItemOnCart}
+            removeButton={productAlreadyInCart}
           >
-            Comprar agora
-          </button>
+            {productAlreadyInCart ? 'Retirar da sacola' : 'Colocar na sacola'}
+          </ShoppingCartButton>
         </ProductDetails>
       </ProductContainer>
     </>
@@ -99,13 +116,11 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
       product: {
         id: product.id,
         name: product.name,
-        imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(price.unit_amount! / 100),
         description: product.description,
+        imageUrl: product.images[0],
         defaultPriceId: price.id,
+        price: price.unit_amount,
+        currency: price.currency.toUpperCase(),
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour

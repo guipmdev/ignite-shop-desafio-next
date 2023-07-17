@@ -17,7 +17,9 @@ export default async function handler(
     return {
       id: product.id,
       name: product.name,
+      description: product.description,
       imageUrl: product.images[0],
+      defaultPriceId: price.id,
       price: price.unit_amount,
       currency: price.currency.toUpperCase(),
     }
