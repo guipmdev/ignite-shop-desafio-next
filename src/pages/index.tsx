@@ -1,15 +1,15 @@
 import 'keen-slider/keen-slider.min.css'
 
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import axios from 'axios'
-import { useKeenSlider } from 'keen-slider/react'
+import { KeenSliderOptions, useKeenSlider } from 'keen-slider/react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
 import Slide from '../components/Slide'
+import SliderController from '../components/SliderController'
 import { MutationPlugin } from '../lib/keen-slider'
-import { HomeContainer, SliderController } from '../styles/pages/home'
+import { HomeContainer } from '../styles/pages/home'
 
 export interface Product {
   id: string
@@ -19,7 +19,7 @@ export interface Product {
 }
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const [products, setProducts] = useState<Product[]>([])
 
@@ -27,32 +27,33 @@ export default function Home() {
   const [totalSlides, setTotalSlides] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const [sliderRef, instanceRef] = useKeenSlider(
-    {
-      slides: {
-        perView: 1.75,
-        spacing: 48,
-      },
-      initial: 0,
+  const keenSliderOptions: KeenSliderOptions = {
+    slides: {
+      perView: 1.75,
+      spacing: 48,
+    },
+    initial: 0,
 
-      slideChanged: (slider) => {
-        setCurrentSlide(slider.track.details.rel)
-      },
+    slideChanged: (slider) => {
+      setCurrentSlide(slider.track.details.rel)
+    },
 
-      created: (slider) => {
-        if (slider.track.details) {
-          setTotalSlides(slider.track.details.slides.length)
-          setLoaded(true)
-        }
-      },
-
-      updated: (slider) => {
+    created: (slider) => {
+      if (slider.track.details) {
         setTotalSlides(slider.track.details.slides.length)
         setLoaded(true)
-      },
+      }
     },
-    [MutationPlugin],
-  )
+
+    updated: (slider) => {
+      setTotalSlides(slider.track.details.slides.length)
+      setLoaded(true)
+    },
+  }
+
+  const [sliderRef, instanceRef] = useKeenSlider(keenSliderOptions, [
+    MutationPlugin,
+  ])
 
   const slides = isLoading
     ? [1, 2, 3].map((number) => {
@@ -99,19 +100,15 @@ export default function Home() {
         {loaded && instanceRef.current && (
           <>
             <SliderController
-              className="right"
               hidden={currentSlide === totalSlides - 1}
-            >
-              <button onClick={() => handleSlideChange('next')}>
-                <CaretRight size={48} />
-              </button>
-            </SliderController>
+              onClick={() => handleSlideChange('next')}
+            />
 
-            <SliderController className="left" hidden={currentSlide === 0}>
-              <button onClick={() => handleSlideChange('prev')}>
-                <CaretLeft size={48} />
-              </button>
-            </SliderController>
+            <SliderController
+              left
+              hidden={currentSlide === 0}
+              onClick={() => handleSlideChange('prev')}
+            />
           </>
         )}
       </HomeContainer>
