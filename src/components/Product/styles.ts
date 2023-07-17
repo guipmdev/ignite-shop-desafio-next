@@ -96,23 +96,6 @@ export const ProductContainer = styled(BaseContainer, {
       fontSize: '$xl',
       fontWeight: 'bold',
     },
-
-    button: {
-      background: '$green500',
-
-      padding: '0.75rem',
-      border: 'none',
-      borderRadius: 6,
-
-      color: '$white',
-      lineHeight: 0,
-
-      cursor: 'pointer',
-
-      '&:hover': {
-        background: '$green300',
-      },
-    },
   },
 
   '&:hover': {

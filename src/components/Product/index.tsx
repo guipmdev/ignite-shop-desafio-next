@@ -1,7 +1,7 @@
-import { Handbag } from '@phosphor-icons/react'
 import Image from 'next/image'
 
 import { ProductType } from '../../pages'
+import ShoppingCartButton from '../ShopppingCartButton'
 import { PlaceholderContainer, ProductContainer } from './styles'
 
 interface ProductProps {
@@ -29,9 +29,7 @@ export default function Product({ product }: ProductProps) {
           <span>{product.price}</span>
         </div>
 
-        <button>
-          <Handbag weight="bold" size={32} />
-        </button>
+        <ShoppingCartButton />
       </footer>
     </ProductContainer>
   )
