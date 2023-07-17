@@ -12,7 +12,7 @@ export default function Header() {
         <Image src={logoImg} alt="" />
       </Link>
 
-      <ShoppingCartButton size={24} backgroundColor="gray" />
+      <ShoppingCartButton size={24} backgroundColor="gray" hasCounter />
     </HeaderContainer>
   )
 }

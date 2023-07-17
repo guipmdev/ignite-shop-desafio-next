@@ -1,6 +1,8 @@
 import { styled } from '../../styles'
 
 export const ShoppingCartButtonContainer = styled('button', {
+  position: 'relative',
+
   background: '$green500',
 
   padding: '0.75rem',
@@ -18,6 +20,27 @@ export const ShoppingCartButtonContainer = styled('button', {
     color: '$white',
 
     transition: 'background-color 0.2s, color 0.2s',
+  },
+
+  span: {
+    position: 'absolute',
+    top: 'calc((1.5rem * 0.25) * -1)',
+    right: 'calc((1.5rem * 0.25) * -1)',
+
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    background: '$green500',
+    width: '1.5rem',
+    height: '1.5rem',
+
+    border: '3px solid $gray900',
+    borderRadius: '50%',
+
+    color: '$white',
+    fontSize: '0.875rem',
+    fontWeight: 'bold',
   },
 
   variants: {
