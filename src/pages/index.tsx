@@ -6,12 +6,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
-import Slide from '../components/Slide'
+import Product from '../components/Product'
 import SliderController from '../components/SliderController'
 import { MutationPlugin } from '../lib/keen-slider'
 import { HomeContainer } from '../styles/pages/home'
 
-export interface Product {
+export interface ProductType {
   id: string
   name: string
   imageUrl: string
@@ -21,7 +21,7 @@ export interface Product {
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
 
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
 
   const [loaded, setLoaded] = useState(false)
   const [totalSlides, setTotalSlides] = useState(0)
@@ -57,7 +57,7 @@ export default function Home() {
 
   const slides = isLoading
     ? [1, 2, 3].map((number) => {
-        return <Slide key={number} />
+        return <Product key={number} />
       })
     : products.map((product) => {
         return (
@@ -66,7 +66,7 @@ export default function Home() {
             key={product.id}
             prefetch={false}
           >
-            <Slide product={product} />
+            <Product product={product} />
           </Link>
         )
       })
