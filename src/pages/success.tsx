@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ReactElement } from 'react'
 import Stripe from 'stripe'
 
 import { stripe } from '../lib/stripe'
@@ -48,6 +49,10 @@ export default function Success({ customerName, products }: SuccessProps) {
       </SuccessContainer>
     </>
   )
+}
+
+Success.getLayout = function getLayout(page: ReactElement) {
+  return page
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

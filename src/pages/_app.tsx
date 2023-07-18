@@ -1,4 +1,6 @@
+import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { ReactElement, ReactNode } from 'react'
 import { CartProvider } from 'use-shopping-cart'
 
 import Header from '../components/Header'
@@ -9,7 +11,26 @@ globalStyles()
 
 const stripeKey = process.env.STRIPE_PUBLIC_KEY!
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout =
+    Component.getLayout ||
+    ((page) => {
+      return (
+        <>
+          <Header />
+          {page}
+        </>
+      )
+    })
+
   return (
     <CartProvider
       cartMode="checkout-session"
@@ -17,11 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
       currency="BRL"
       shouldPersist={true}
     >
-      <Container>
-        <Header />
-
-        <Component {...pageProps} />
-      </Container>
+      <Container>{getLayout(<Component {...pageProps} />)}</Container>
     </CartProvider>
   )
 }
