@@ -4,8 +4,9 @@ import Image from 'next/image'
 import { MouseEvent } from 'react'
 import Stripe from 'stripe'
 import { useShoppingCart } from 'use-shopping-cart'
+import { CartDetails } from 'use-shopping-cart/core'
 
-import MainButton from '../../components/MainButton'
+import { MainButton } from '../../components/MainButton'
 import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
@@ -20,10 +21,12 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const { cartDetails, removeItem, addItem } = useShoppingCart()
+  const cart = useShoppingCart()
+  const { removeItem, addItem } = cart
 
-  const productAlreadyInCart =
-    !!cartDetails && Object.keys(cartDetails).includes(product.id)
+  const cartDetails = cart.cartDetails || ({} as CartDetails)
+
+  const productAlreadyInCart = Object.keys(cartDetails).includes(product.id)
 
   function handleModifyItemOnCart(event: MouseEvent<HTMLElement>) {
     event.preventDefault()

@@ -1,18 +1,22 @@
 import Image from 'next/image'
 import { MouseEvent } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
+import { CartDetails } from 'use-shopping-cart/core'
 
 import { ProductType } from '../../pages'
 import { currencyFormatter } from '../../utils/formatters'
-import ShoppingCartButton from '../ShopppingCartButton'
+import { ShoppingCartButton } from '../ShopppingCartButton'
 import { PlaceholderContainer, ProductContainer } from './styles'
 
 interface ProductProps {
   product?: ProductType
 }
 
-export default function Product({ product }: ProductProps) {
-  const { removeItem, addItem, cartDetails } = useShoppingCart()
+export function Product({ product }: ProductProps) {
+  const cart = useShoppingCart()
+  const { removeItem, addItem } = cart
+
+  const cartDetails = cart.cartDetails || ({} as CartDetails)
 
   const isPlaceholder = !product
 
@@ -28,16 +32,18 @@ export default function Product({ product }: ProductProps) {
     )
   }
 
-  const productAlreadyInCart =
-    !!cartDetails && Object.keys(cartDetails).includes(product.id)
+  const productAlreadyInCart = Object.keys(cartDetails).includes(product.id)
 
-  function handleModifyItemOnCart(event: MouseEvent<HTMLElement>) {
+  const handleModifyItemOnCart = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()
 
-    if (productAlreadyInCart) {
-      removeItem(product!.id)
-    } else {
-      addItem(product!)
+    switch (productAlreadyInCart) {
+      case true:
+        removeItem(product.id)
+        break
+      case false:
+        addItem(product)
+        break
     }
   }
 

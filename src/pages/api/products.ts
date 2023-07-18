@@ -4,7 +4,7 @@ import Stripe from 'stripe'
 import { stripe } from '../../lib/stripe'
 
 export default async function handler(
-  req: NextApiRequest,
+  _req: NextApiRequest,
   res: NextApiResponse,
 ) {
   const response = await stripe.products.list({

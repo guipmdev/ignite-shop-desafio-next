@@ -10,7 +10,7 @@ interface CartProductProps {
   removeItem: CartActions['removeItem']
 }
 
-export default function CartProduct({ product, removeItem }: CartProductProps) {
+export function CartProduct({ product, removeItem }: CartProductProps) {
   function handleRemoveItemFromCart() {
     removeItem(product.id)
   }
@@ -18,7 +18,9 @@ export default function CartProduct({ product, removeItem }: CartProductProps) {
   return (
     <CartProductContainer>
       <ImageContainer>
-        <Image src={product.image!} alt="" width={95} height={95} />
+        {!!product.image && (
+          <Image src={product.image} alt="" width={95} height={95} />
+        )}
       </ImageContainer>
 
       <div className="product-infos">

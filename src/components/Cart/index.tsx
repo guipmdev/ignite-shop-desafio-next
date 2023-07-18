@@ -1,12 +1,13 @@
 import { X } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
+import { CartDetails } from 'use-shopping-cart/core'
 
 import { currencyFormatter } from '../../utils/formatters'
-import CartProduct from '../CartProduct'
-import MainButton from '../MainButton'
+import { CartProduct } from '../CartProduct'
+import { MainButton } from '../MainButton'
 import { CloseButton, Content, Overlay } from './styles'
 
 interface Product {
@@ -14,22 +15,26 @@ interface Product {
   quantity: number
 }
 
-export default function Cart() {
+export function Cart() {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
-  const { cartDetails, clearCart, removeItem, cartCount, totalPrice } =
-    useShoppingCart()
+  const cart = useShoppingCart()
+  const { clearCart, removeItem } = cart
+
+  const cartDetails = cart.cartDetails || ({} as CartDetails)
+  const cartCount = cart.cartCount || 0
+  const totalPrice = cart.totalPrice || 0
 
   async function handleCreateCheckout() {
     try {
       setIsCreatingCheckoutSession(true)
 
-      const selectedProducts: Product[] = Object.keys(cartDetails!).map(
+      const selectedProducts: Product[] = Object.keys(cartDetails).map(
         (cartProductId) => {
           return {
-            price: cartDetails![cartProductId].price_id,
-            quantity: cartDetails![cartProductId].quantity,
+            price: cartDetails[cartProductId].price_id,
+            quantity: cartDetails[cartProductId].quantity,
           }
         },
       )
@@ -64,16 +69,15 @@ export default function Cart() {
         </CloseButton>
 
         <ul>
-          {!!cartDetails &&
-            Object.keys(cartDetails).map((cartProductId) => {
-              return (
-                <CartProduct
-                  key={cartProductId}
-                  product={cartDetails[cartProductId]}
-                  removeItem={removeItem}
-                />
-              )
-            })}
+          {Object.keys(cartDetails).map((cartProductId) => {
+            return (
+              <CartProduct
+                key={cartProductId}
+                product={cartDetails[cartProductId]}
+                removeItem={removeItem}
+              />
+            )
+          })}
         </ul>
 
         <footer>
@@ -81,7 +85,7 @@ export default function Cart() {
             <div>
               <p>Quantidade</p>{' '}
               <span>
-                {cartCount} {cartCount! > 1 ? 'itens' : 'item'}
+                {cartCount} {cartCount > 1 ? 'itens' : 'item'}
               </span>
             </div>
 
@@ -91,7 +95,7 @@ export default function Cart() {
               </p>
 
               <span>
-                <strong>{currencyFormatter.format(totalPrice! / 100)}</strong>
+                <strong>{currencyFormatter.format(totalPrice / 100)}</strong>
               </span>
             </div>
           </div>

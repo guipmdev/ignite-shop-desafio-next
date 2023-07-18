@@ -8,7 +8,7 @@ interface MainButtonProps
   removeButton?: boolean
 }
 
-export default function MainButton({
+export function MainButton({
   content,
   removeButton,
   ...rest

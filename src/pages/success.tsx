@@ -5,17 +5,19 @@ import Link from 'next/link'
 import { ReactElement } from 'react'
 import Stripe from 'stripe'
 
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import { stripe } from '../lib/stripe'
 import { ImageContainer, SuccessContainer } from '../styles/pages/success'
 
+interface Product {
+  id: string
+  name: string
+  image: string
+}
+
 interface SuccessProps {
   customerName: string
-  products: {
-    id: string
-    name: string
-    image: string
-  }[]
+  products: Product[]
 }
 
 export default function Success({ customerName, products }: SuccessProps) {
@@ -77,10 +79,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     expand: ['line_items', 'line_items.data.price.product'],
   })
 
-  const customerName = session.customer_details!.name
+  const customerName = session.customer_details?.name
 
-  const products = session.line_items!.data.map((item) => {
-    const product = item.price!.product as Stripe.Product
+  const products = session.line_items?.data.map((item) => {
+    const product = item.price?.product as Stripe.Product
 
     return {
       id: product.id,

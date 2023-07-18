@@ -55,6 +55,9 @@ export const ProductContainer = styled(BaseContainer, {
 
   img: {
     objectFit: 'cover',
+    width: '100%',
+    maxWidth: 520,
+    height: 'auto',
   },
 
   footer: {

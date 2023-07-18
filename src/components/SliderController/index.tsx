@@ -9,7 +9,7 @@ interface SliderControllerProps
   hidden?: boolean
 }
 
-export default function SliderController({
+export function SliderController({
   left,
   hidden,
   ...rest

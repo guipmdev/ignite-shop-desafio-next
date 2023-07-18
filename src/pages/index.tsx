@@ -6,8 +6,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
-import Product from '../components/Product'
-import SliderController from '../components/SliderController'
+import { Product } from '../components/Product'
+import { SliderController } from '../components/SliderController'
 import { MutationPlugin } from '../lib/keen-slider'
 import { HomeContainer } from '../styles/pages/home'
 
@@ -22,11 +22,10 @@ export interface ProductType {
 }
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isReadingProducts, setIsReadingProducts] = useState(true)
 
   const [products, setProducts] = useState<ProductType[]>([])
 
-  const [loaded, setLoaded] = useState(false)
   const [totalSlides, setTotalSlides] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(0)
 
@@ -44,13 +43,11 @@ export default function Home() {
     created: (slider) => {
       if (slider.track.details) {
         setTotalSlides(slider.track.details.slides.length)
-        setLoaded(true)
       }
     },
 
     updated: (slider) => {
       setTotalSlides(slider.track.details.slides.length)
-      setLoaded(true)
     },
   }
 
@@ -58,7 +55,7 @@ export default function Home() {
     MutationPlugin,
   ])
 
-  const slides = isLoading
+  const slides = isReadingProducts
     ? [1, 2, 3].map((number) => {
         return <Product key={number} />
       })
@@ -75,12 +72,12 @@ export default function Home() {
       })
 
   const readProducts = useCallback(async () => {
-    setIsLoading(true)
+    setIsReadingProducts(true)
 
     const response = await axios.get('/api/products')
     setProducts(response.data)
 
-    setIsLoading(false)
+    setIsReadingProducts(false)
   }, [])
 
   useEffect(() => {
@@ -91,6 +88,8 @@ export default function Home() {
     instanceRef.current?.[action]()
   }
 
+  const sliderCreated = !!instanceRef.current
+
   return (
     <>
       <Head>
@@ -100,7 +99,7 @@ export default function Home() {
       <HomeContainer ref={sliderRef} className="keen-slider">
         {slides}
 
-        {loaded && instanceRef.current && (
+        {sliderCreated && (
           <>
             <SliderController
               hidden={currentSlide === totalSlides - 1}

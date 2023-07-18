@@ -3,13 +3,13 @@ import type { AppProps } from 'next/app'
 import { ReactElement, ReactNode } from 'react'
 import { CartProvider } from 'use-shopping-cart'
 
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import { globalStyles } from '../styles/global'
 import { Container } from '../styles/pages/app'
 
-globalStyles()
+const stripeKey = process.env.STRIPE_PUBLIC_KEY as string
 
-const stripeKey = process.env.STRIPE_PUBLIC_KEY!
+globalStyles()
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
