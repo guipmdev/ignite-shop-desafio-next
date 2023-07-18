@@ -20,7 +20,7 @@ export function Cart() {
     useState(false)
 
   const cart = useShoppingCart()
-  const { clearCart, removeItem } = cart
+  const { removeItem } = cart
 
   const cartDetails = cart.cartDetails || ({} as CartDetails)
   const cartCount = cart.cartCount || 0
@@ -42,8 +42,6 @@ export function Cart() {
       const response = await axios.post('/api/checkout', {
         selectedProducts,
       })
-
-      clearCart()
 
       const { checkoutUrl } = response.data
 

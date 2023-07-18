@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ReactElement } from 'react'
 import Stripe from 'stripe'
+import { useShoppingCart } from 'use-shopping-cart'
 
 import { Header } from '../components/Header'
 import { stripe } from '../lib/stripe'
@@ -21,6 +22,11 @@ interface SuccessProps {
 }
 
 export default function Success({ customerName, products }: SuccessProps) {
+  const cart = useShoppingCart()
+  const { clearCart, cartCount } = cart
+
+  if (cartCount) clearCart()
+
   return (
     <>
       <Head>
