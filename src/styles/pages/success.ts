@@ -11,8 +11,11 @@ export const SuccessContainer = styled('main', {
   margin: '0 auto',
 
   h1: {
-    color: '$gray100',
-    fontSize: '$2xl',
+    color: '$grayscale-title',
+    fontSize: '$font-size-4xl',
+    lineHeight: '140%',
+
+    marginBottom: '4rem',
   },
 
   p: {
@@ -20,10 +23,21 @@ export const SuccessContainer = styled('main', {
 
     marginTop: '2rem',
 
-    color: '$gray300',
-    fontSize: '$xl',
+    fontSize: '$font-size-2xl',
     textAlign: 'center',
-    lineHeight: 1.4,
+    lineHeight: '140%',
+  },
+
+  '.images': {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    width: '100%',
+
+    'div + div': {
+      marginLeft: '-10%',
+    },
   },
 
   a: {
@@ -31,13 +45,15 @@ export const SuccessContainer = styled('main', {
 
     marginTop: '5rem',
 
-    color: '$green500',
-    fontSize: '$lg',
-    fontWeight: 'bold',
+    color: '$brand-principal',
+    fontSize: '$font-size-xl',
+    fontWeight: 700,
     textDecoration: 'none',
 
     '&:hover': {
-      color: '$green300',
+      color: '$brand-light',
+
+      transition: 'color 0.2s',
     },
   },
 })
@@ -47,14 +63,14 @@ export const ImageContainer = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
-  width: '100%',
-  maxWidth: 130,
-  height: 145,
+  background: 'linear-gradient(180deg, $color-green 0%, $color-purple 100%)',
+  width: 140,
+  height: 140,
 
   padding: '0.25rem',
-  borderRadius: 8,
-  marginTop: '4rem',
+  borderRadius: '50%',
+
+  boxShadow: '0 0 60px 0 rgb(0 0 0 / 80%)',
 
   img: {
     objectFit: 'cover',
