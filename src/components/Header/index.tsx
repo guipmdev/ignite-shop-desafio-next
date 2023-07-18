@@ -1,8 +1,10 @@
+import * as Dialog from '@radix-ui/react-dialog'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useShoppingCart } from 'use-shopping-cart'
 
 import logoImg from '../../assets/logo.svg'
+import Cart from '../Cart'
 import ShoppingCartButton from '../ShopppingCartButton'
 import { HeaderContainer } from './styles'
 
@@ -15,11 +17,17 @@ export default function Header() {
         <Image src={logoImg} alt="" />
       </Link>
 
-      <ShoppingCartButton
-        size={24}
-        backgroundColor="gray"
-        counter={cartCount}
-      />
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <ShoppingCartButton
+            size={24}
+            backgroundColor="gray"
+            counter={cartCount}
+          />
+        </Dialog.Trigger>
+
+        <Cart />
+      </Dialog.Root>
     </HeaderContainer>
   )
 }

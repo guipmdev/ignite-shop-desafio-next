@@ -17,13 +17,16 @@ export default function ShoppingCartButton({
   removeButton,
   ...rest
 }: ShoppingCartButtonProps) {
+  const hasCounter = !!counter
+
   return (
     <ShoppingCartButtonContainer
       backgroundColor={backgroundColor}
       removeButton={removeButton}
+      hasCounter={hasCounter}
       {...rest}
     >
-      {!!counter && <span>{counter}</span>}
+      {hasCounter && <span>{counter}</span>}
       <Handbag weight="bold" size={size || 32} />
     </ShoppingCartButtonContainer>
   )

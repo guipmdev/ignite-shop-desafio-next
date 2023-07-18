@@ -3,21 +3,19 @@ import { styled } from '../../styles'
 export const ShoppingCartButtonContainer = styled('button', {
   position: 'relative',
 
-  background: '$green500',
+  background: '$brand-principal',
 
   padding: '0.75rem',
   border: 'none',
   borderRadius: 6,
 
-  color: '$white',
+  color: '$grayscale-white',
   lineHeight: 0,
 
   cursor: 'pointer',
 
   '&:hover': {
-    background: '$green300',
-
-    color: '$white',
+    background: '$brand-light',
 
     transition: 'background-color 0.2s, color 0.2s',
   },
@@ -31,14 +29,14 @@ export const ShoppingCartButtonContainer = styled('button', {
     justifyContent: 'center',
     alignItems: 'center',
 
-    background: '$green500',
+    background: '$brand-principal',
     width: '1.5rem',
     height: '1.5rem',
 
-    border: '3px solid $gray900',
+    border: '3px solid $grayscale-background',
     borderRadius: '50%',
 
-    color: '$white',
+    color: '$grayscale-white',
     fontSize: '0.875rem',
     fontWeight: 'bold',
   },
@@ -46,21 +44,31 @@ export const ShoppingCartButtonContainer = styled('button', {
   variants: {
     backgroundColor: {
       gray: {
-        background: '$gray800',
+        background: '$grayscale-elements',
 
-        color: '#8D8D99',
+        color: '$grayscale-icon',
+
+        '&:hover': {
+          color: '$grayscale-white',
+        },
       },
     },
 
     removeButton: {
       true: {
-        background: '$red500',
+        background: '$color-red',
 
-        color: '$white',
+        color: '$grayscale-white',
 
         '&:hover': {
-          background: '$red300',
+          background: '$color-red-light',
         },
+      },
+    },
+
+    hasCounter: {
+      true: {
+        color: '$grayscale-white',
       },
     },
   },

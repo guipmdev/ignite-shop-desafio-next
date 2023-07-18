@@ -18,7 +18,8 @@ export const SliderControllerContainer = styled('div', {
   justifyContent: 'flex-end',
   alignItems: 'center',
 
-  background: 'linear-gradient(-90deg, $gray900 0%, transparent 100%)',
+  background:
+    'linear-gradient(-90deg, $grayscale-background 0%, transparent 100%)',
   width: '100%',
   maxWidth: 136,
   height: '100%',
@@ -33,13 +34,15 @@ export const SliderControllerContainer = styled('div', {
     border: 'none',
     marginRight: 30,
 
-    color: '$gray300',
+    color: '$grayscale-text',
     lineHeight: 0,
 
     cursor: 'pointer',
 
     '&:hover': {
-      color: '$white',
+      color: '$grayscale-white',
+
+      transition: 'color 0.2s',
     },
   },
 
@@ -50,7 +53,8 @@ export const SliderControllerContainer = styled('div', {
 
         justifyContent: 'flex-start',
 
-        background: 'linear-gradient(90deg, $gray900 0%, transparent 100%)',
+        background:
+          'linear-gradient(90deg, $grayscale-background 0%, transparent 100%)',
 
         button: {
           rotate: '180deg',

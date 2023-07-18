@@ -20,7 +20,7 @@ export const PlaceholderContainer = styled(BaseContainer, {
   background: 'transparent',
 
   div: {
-    background: '$gray800',
+    background: '$grayscale-elements',
     width: '100%',
     height: '100%',
 
@@ -49,7 +49,7 @@ export const PlaceholderContainer = styled(BaseContainer, {
 })
 
 export const ProductContainer = styled(BaseContainer, {
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  background: 'linear-gradient(180deg, $color-green 0%, $color-purple 100%)',
 
   cursor: 'pointer',
 
@@ -72,7 +72,7 @@ export const ProductContainer = styled(BaseContainer, {
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    backgroundColor: 'rgb(0 0 0 / 0.6)',
+    backgroundColor: 'rgb(0 0 0 / 60%)',
 
     padding: '2rem',
     borderRadius: 6,
@@ -82,9 +82,8 @@ export const ProductContainer = styled(BaseContainer, {
     strong: {
       display: 'block',
 
-      fontSize: '$lg',
-      lineHeight: '160%',
-      color: '$gray100',
+      fontSize: '$font-size-xl',
+      color: '$grayscale-title',
 
       marginBottom: '0.25rem',
     },
@@ -92,9 +91,10 @@ export const ProductContainer = styled(BaseContainer, {
     span: {
       display: 'block',
 
-      color: '$green300',
-      fontSize: '$xl',
-      fontWeight: 'bold',
+      color: '$brand-light',
+      fontSize: '$font-size-2xl',
+      fontWeight: 700,
+      lineHeight: '140%',
     },
   },
 

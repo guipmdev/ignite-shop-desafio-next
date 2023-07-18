@@ -16,7 +16,7 @@ export const ImageContainer = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  background: 'linear-gradient(180deg, $color-green 0%, $color-purple 100%)',
   width: '100%',
   maxWidth: 576,
   height: 656,
@@ -34,8 +34,8 @@ export const ProductDetails = styled('div', {
   flexDirection: 'column',
 
   h1: {
-    color: '$gray300',
-    fontSize: '$2xl',
+    fontSize: '$font-size-4xl',
+    lineHeight: '140%',
   },
 
   span: {
@@ -43,48 +43,12 @@ export const ProductDetails = styled('div', {
 
     marginTop: '1rem',
 
-    color: '$green300',
-    fontSize: '$2xl',
+    color: '$brand-light',
+    fontSize: '$font-size-4xl',
+    lineHeight: '140%',
   },
 
   p: {
     marginTop: '2.5rem',
-
-    color: '$gray300',
-    fontSize: '$md',
-    lineHeight: 1.6,
-  },
-})
-
-export const ShoppingCartButton = styled('button', {
-  background: '$green500',
-
-  padding: '1.25rem',
-  border: 0,
-  borderRadius: 8,
-  marginTop: 'auto',
-
-  color: '$white',
-  fontSize: '$md',
-  fontWeight: 'bold',
-
-  cursor: 'pointer',
-
-  '&:hover': {
-    background: '$green300',
-  },
-
-  variants: {
-    removeButton: {
-      true: {
-        background: '$red500',
-
-        color: '$white',
-
-        '&:hover': {
-          background: '$red300',
-        },
-      },
-    },
   },
 })

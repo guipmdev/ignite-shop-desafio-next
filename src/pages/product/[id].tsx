@@ -1,17 +1,16 @@
-import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent } from 'react'
 import Stripe from 'stripe'
 import { useShoppingCart } from 'use-shopping-cart'
 
+import MainButton from '../../components/MainButton'
 import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
   ProductContainer,
   ProductDetails,
-  ShoppingCartButton,
 } from '../../styles/pages/product'
 import { ProductType } from '..'
 
@@ -22,28 +21,28 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const { cartDetails, removeItem, addItem } = useShoppingCart()
 
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    useState(false)
+  // const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+  //   useState(false)
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true)
+  // async function handleBuyProduct() {
+  //   try {
+  //     setIsCreatingCheckoutSession(true)
 
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
+  //     const response = await axios.post('/api/checkout', {
+  //       priceId: product.defaultPriceId,
+  //     })
 
-      const { checkoutUrl } = response.data
+  //     const { checkoutUrl } = response.data
 
-      window.location.href = checkoutUrl
-    } catch (err) {
-      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
+  //     window.location.href = checkoutUrl
+  //   } catch (err) {
+  //     // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
 
-      setIsCreatingCheckoutSession(false)
+  //     setIsCreatingCheckoutSession(false)
 
-      alert('Falha ao redirecionar ao checkout!')
-    }
-  }
+  //     alert('Falha ao redirecionar ao checkout!')
+  //   }
+  // }
 
   const productAlreadyInCart =
     !!cartDetails && Object.keys(cartDetails).includes(product.id)
@@ -80,13 +79,13 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <ShoppingCartButton
-            disabled={isCreatingCheckoutSession}
+          <MainButton
             onClick={handleModifyItemOnCart}
             removeButton={productAlreadyInCart}
-          >
-            {productAlreadyInCart ? 'Retirar da sacola' : 'Colocar na sacola'}
-          </ShoppingCartButton>
+            content={
+              productAlreadyInCart ? 'Retirar da sacola' : 'Colocar na sacola'
+            }
+          />
         </ProductDetails>
       </ProductContainer>
     </>
