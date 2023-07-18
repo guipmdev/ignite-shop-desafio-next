@@ -1,4 +1,4 @@
-import { Handbag } from '@phosphor-icons/react'
+import Handbag from '@phosphor-icons/react/dist/icons/Handbag'
 
 import { ShoppingCartButtonContainer } from './styles'
 
