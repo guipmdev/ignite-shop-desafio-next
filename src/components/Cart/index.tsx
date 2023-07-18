@@ -1,10 +1,14 @@
 import { X } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useShoppingCart } from 'use-shopping-cart'
 
+import { currencyFormatter } from '../../utils/formatters'
 import MainButton from '../MainButton'
 import { CloseButton, Content, Overlay } from './styles'
 
 export default function Cart() {
+  const { cartCount, totalPrice } = useShoppingCart()
+
   return (
     <Dialog.Portal>
       <Overlay />
@@ -21,7 +25,10 @@ export default function Cart() {
         <footer>
           <div className="order-summary">
             <div>
-              <p>Quantidade</p> <span>3 itens</span>
+              <p>Quantidade</p>{' '}
+              <span>
+                {cartCount} {cartCount! > 1 ? 'itens' : 'item'}
+              </span>
             </div>
 
             <div className="total-price">
@@ -30,7 +37,7 @@ export default function Cart() {
               </p>
 
               <span>
-                <strong>R$ 270,00</strong>
+                <strong>{currencyFormatter.format(totalPrice! / 100)}</strong>
               </span>
             </div>
           </div>

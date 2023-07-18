@@ -12,6 +12,7 @@ import {
   ProductContainer,
   ProductDetails,
 } from '../../styles/pages/product'
+import { currencyFormatter } from '../../utils/formatters'
 import { ProductType } from '..'
 
 interface ProductProps {
@@ -70,12 +71,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>
-            {new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(product.price! / 100)}
-          </span>
+          <span>{currencyFormatter.format(product.price! / 100)}</span>
 
           <p>{product.description}</p>
 

@@ -3,6 +3,7 @@ import { MouseEvent } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
 
 import { ProductType } from '../../pages'
+import { currencyFormatter } from '../../utils/formatters'
 import ShoppingCartButton from '../ShopppingCartButton'
 import { PlaceholderContainer, ProductContainer } from './styles'
 
@@ -47,12 +48,7 @@ export default function Product({ product }: ProductProps) {
       <footer>
         <div>
           <strong>{product.name}</strong>
-          <span>
-            {new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(product.price / 100)}
-          </span>
+          <span>{currencyFormatter.format(product.price / 100)}</span>
         </div>
 
         <ShoppingCartButton
