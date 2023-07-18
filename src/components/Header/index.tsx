@@ -8,26 +8,32 @@ import Cart from '../Cart'
 import ShoppingCartButton from '../ShopppingCartButton'
 import { HeaderContainer } from './styles'
 
-export default function Header() {
+interface HeaderProps {
+  hideCart?: boolean
+}
+
+export default function Header({ hideCart }: HeaderProps) {
   const { cartCount } = useShoppingCart()
 
   return (
-    <HeaderContainer>
+    <HeaderContainer hideCart={hideCart}>
       <Link href="/">
         <Image src={logoImg} alt="" />
       </Link>
 
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <ShoppingCartButton
-            size={24}
-            backgroundColor="gray"
-            counter={cartCount}
-          />
-        </Dialog.Trigger>
+      {!hideCart && (
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <ShoppingCartButton
+              size={24}
+              backgroundColor="gray"
+              counter={cartCount}
+            />
+          </Dialog.Trigger>
 
-        <Cart />
-      </Dialog.Root>
+          <Cart />
+        </Dialog.Root>
+      )}
     </HeaderContainer>
   )
 }

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ReactElement } from 'react'
 import Stripe from 'stripe'
 
+import Header from '../components/Header'
 import { stripe } from '../lib/stripe'
 import { ImageContainer, SuccessContainer } from '../styles/pages/success'
 
@@ -52,7 +53,12 @@ export default function Success({ customerName, products }: SuccessProps) {
 }
 
 Success.getLayout = function getLayout(page: ReactElement) {
-  return page
+  return (
+    <>
+      <Header hideCart />
+      {page}
+    </>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

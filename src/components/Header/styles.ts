@@ -10,4 +10,12 @@ export const HeaderContainer = styled('header', {
 
   padding: '2rem 0',
   margin: '0 auto',
+
+  variants: {
+    hideCart: {
+      true: {
+        justifyContent: 'center',
+      },
+    },
+  },
 })
