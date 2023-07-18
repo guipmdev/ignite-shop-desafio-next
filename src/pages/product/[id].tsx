@@ -29,9 +29,9 @@ export default function Product({ product }: ProductProps) {
     event.preventDefault()
 
     if (productAlreadyInCart) {
-      removeItem(product!.id)
+      removeItem(product.id)
     } else {
-      addItem(product!)
+      addItem(product)
     }
   }
 
@@ -48,7 +48,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{currencyFormatter.format(product.price! / 100)}</span>
+          <span>{currencyFormatter.format(product.price / 100)}</span>
 
           <p>{product.description}</p>
 
@@ -72,10 +72,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
-  const productId = params!.id
+  const productId = params?.id
+
+  if (!productId) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    }
+  }
 
   const product = await stripe.products.retrieve(productId, {
     expand: ['default_price'],
