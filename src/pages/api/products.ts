@@ -18,8 +18,8 @@ export default async function handler(
       id: product.id,
       name: product.name,
       description: product.description,
-      imageUrl: product.images[0],
-      defaultPriceId: price.id,
+      image: product.images[0],
+      price_id: price.id,
       price: price.unit_amount,
       currency: price.currency.toUpperCase(),
     }

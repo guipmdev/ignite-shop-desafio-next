@@ -8,7 +8,7 @@ import MainButton from '../MainButton'
 import { CloseButton, Content, Overlay } from './styles'
 
 export default function Cart() {
-  const { cartCount, totalPrice } = useShoppingCart()
+  const { cartDetails, removeItem, cartCount, totalPrice } = useShoppingCart()
 
   return (
     <Dialog.Portal>
@@ -22,9 +22,16 @@ export default function Cart() {
         </CloseButton>
 
         <ul>
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
+          {!!cartDetails &&
+            Object.keys(cartDetails).map((cartProductId) => {
+              return (
+                <CartProduct
+                  key={cartProductId}
+                  product={cartDetails[cartProductId]}
+                  removeItem={removeItem}
+                />
+              )
+            })}
         </ul>
 
         <footer>

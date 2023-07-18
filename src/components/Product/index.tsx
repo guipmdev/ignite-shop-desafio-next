@@ -43,7 +43,7 @@ export default function Product({ product }: ProductProps) {
 
   return (
     <ProductContainer className="keen-slider__slide">
-      <Image src={product.imageUrl} width={520} height={480} alt="" />
+      <Image src={product.image} width={520} height={480} alt="" />
 
       <footer>
         <div>

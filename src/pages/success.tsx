@@ -11,7 +11,7 @@ interface SuccessProps {
   customerName: string
   product: {
     name: string
-    imageUrl: string
+    image: string
   }
 }
 
@@ -28,7 +28,7 @@ export default function Success({ customerName, product }: SuccessProps) {
         <h1>Compra efetuada!</h1>
 
         <ImageContainer>
-          <Image src={product.imageUrl} width={120} height={110} alt="" />
+          <Image src={product.image} width={120} height={110} alt="" />
         </ImageContainer>
 
         <p>
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       customerName,
       product: {
         name: product.name,
-        imageUrl: product.images[0],
+        image: product.images[0],
       },
     },
   }

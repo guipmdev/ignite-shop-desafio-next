@@ -15,8 +15,8 @@ export interface ProductType {
   id: string
   name: string
   description: string
-  imageUrl: string
-  defaultPriceId: string
+  image: string
+  price_id: string
   price: number
   currency: string
 }

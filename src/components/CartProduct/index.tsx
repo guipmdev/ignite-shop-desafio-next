@@ -1,18 +1,30 @@
 import Image from 'next/image'
+import { CartActions } from 'use-shopping-cart'
+import { CartEntry } from 'use-shopping-cart/core'
 
+import { currencyFormatter } from '../../utils/formatters'
 import { CartProductContainer, ImageContainer } from './styles'
 
-export default function CartProduct() {
+interface CartProductProps {
+  product: CartEntry
+  removeItem: CartActions['removeItem']
+}
+
+export default function CartProduct({ product, removeItem }: CartProductProps) {
+  function handleRemoveItemFromCart() {
+    removeItem(product.id)
+  }
+
   return (
     <CartProductContainer>
       <ImageContainer>
-        <Image src="" alt="" width={95} height={95} />
+        <Image src={product.image!} alt="" width={95} height={95} />
       </ImageContainer>
 
       <div className="product-infos">
-        <span>Camiseta Beyond the Limits</span>
-        <strong>R$ 79,90</strong>
-        <button>Remover</button>
+        <span>{product.name}</span>
+        <strong>{currencyFormatter.format(product.price / 100)}</strong>
+        <button onClick={handleRemoveItemFromCart}>Remover</button>
       </div>
     </CartProductContainer>
   )

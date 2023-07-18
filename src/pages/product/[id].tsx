@@ -66,7 +66,7 @@ export default function Product({ product }: ProductProps) {
 
       <ProductContainer>
         <ImageContainer>
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Image src={product.image} width={520} height={480} alt="" />
         </ImageContainer>
 
         <ProductDetails>
@@ -112,8 +112,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         id: product.id,
         name: product.name,
         description: product.description,
-        imageUrl: product.images[0],
-        defaultPriceId: price.id,
+        image: product.images[0],
+        price_id: price.id,
         price: price.unit_amount,
         currency: price.currency.toUpperCase(),
       },
