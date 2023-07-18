@@ -18,7 +18,8 @@ export default function Cart() {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
-  const { cartDetails, removeItem, cartCount, totalPrice } = useShoppingCart()
+  const { cartDetails, clearCart, removeItem, cartCount, totalPrice } =
+    useShoppingCart()
 
   async function handleCreateCheckout() {
     try {
@@ -36,6 +37,8 @@ export default function Cart() {
       const response = await axios.post('/api/checkout', {
         selectedProducts,
       })
+
+      clearCart()
 
       const { checkoutUrl } = response.data
 
