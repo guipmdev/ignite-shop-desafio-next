@@ -28,6 +28,9 @@ export const Content = styled(Dialog.Content, {
   boxShadow: '-4px 0 30px 0 rgb(0 0 0 / 80%)',
 
   ul: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
     flex: 1,
   },
 
