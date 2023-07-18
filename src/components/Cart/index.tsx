@@ -3,6 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { useShoppingCart } from 'use-shopping-cart'
 
 import { currencyFormatter } from '../../utils/formatters'
+import CartProduct from '../CartProduct'
 import MainButton from '../MainButton'
 import { CloseButton, Content, Overlay } from './styles'
 
@@ -20,7 +21,11 @@ export default function Cart() {
           <X weight="bold" size={32} />
         </CloseButton>
 
-        <ul></ul>
+        <ul>
+          <CartProduct />
+          <CartProduct />
+          <CartProduct />
+        </ul>
 
         <footer>
           <div className="order-summary">
