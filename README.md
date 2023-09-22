@@ -113,6 +113,8 @@ is to provide an even more user-friendly and visually appealing shopping experie
 
 ## 🤖 Demo
 
+https://github.com/guipmdev/ignite-shop-v2/assets/136738335/fd45f116-53eb-426f-b6e9-aa328dadaa6f
+
 ## 🎨 Layout
 
 The layout of the application was designed by **Rocketseat** and is available on [Figma](https://www.figma.com/file/nIkPaTxXF0NedsKjOaSdMq/Ignite-Shop-2.0-%E2%80%A2-Desafio-React).
