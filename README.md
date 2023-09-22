@@ -93,9 +93,9 @@
 
 ## 📍 Overview
 
-This project is a web application developed in _Next.js_ and _TypeScript_ for a fictitious online store that displays the products on the home page in a carousel, allowing users to view the details by clicking on them and make the purchase via Stripe's payment platform. It also has a success page that displays the details of what has been purchased.
+This project is a web application developed in _Next.js_ and _TypeScript_ for a fictitious online store that displays its products on the home page in a carousel format, allowing users to view the details by clicking on them and make the payment via Stripe. It also has a shopping cart and a success page that displays the details of the items purchased.
 
-The objective of Ignite Shop is to provide a user-friendly and visually appealing shopping experience by integrating with a popular payment processor to simplify the purchasing experience for customers.
+is to provide an even more user-friendly and visually appealing shopping experience, now with a shopping bag for storing multiple items, by integrating with a popular payment processor to simplify the purchasing experience for customers.
 
 ## ✨ Features
 
@@ -103,9 +103,13 @@ The objective of Ignite Shop is to provide a user-friendly and visually appealin
 
 👀 **See more details** by clicking on the desired product
 
-💳 **Choose** what you want and **finalize payment** through Stripe (_only symbolic_)
+🛒 Add the items you want to the **cart**
 
-🚚 Wait for your purchase to arrive
+🔄 Your **cart is stored** until you close the order, so you can refresh the page with no worry
+
+💳**Pay** via Stripe (_only symbolic_)
+
+🚚 Wait for your purchases to arrive
 
 ## 🤖 Demo
 
@@ -273,23 +277,25 @@ npm install
 
 ### ⚙️ Usage
 
-1. Log in to your [Stripe](https://stripe.com/) account and get your [_API keys_](https://dashboard.stripe.com/test/apikeys)
+1. Log in/create your account at [Stripe](https://stripe.com/)
 
-   - Check the [Stripe documentation](https://stripe.com/docs/keys) if you need to
+   - Create a store, products and do all the necessary configuration
 
-2. Rename the file `.env.local.example` to `.env` and insert the necessary information:
+2. Get your [_API keys_](https://dashboard.stripe.com/test/apikeys)
+
+3. Rename the file `.env.local.example` to `.env` and insert the necessary information:
 
 ```sh
 mv .env.local.example .env
 ```
 
-3. Start the web application:
+2. Start the web application:
 
 ```sh
 npm run dev
 ```
 
-2. Access http://localhost:3000/ to view the application
+3. Access http://localhost:3000/ to view the application
 
 ## 📄 License
 

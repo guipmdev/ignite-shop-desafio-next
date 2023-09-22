@@ -93,9 +93,9 @@
 
 ## 📍 Visão geral
 
-Este projeto é uma aplicação web desenvolvida em _Next.js_ e _TypeScript_ de uma loja on-line fictícia que exibe os produtos na página inicial em um carrossel, possibilitando aos usuários visualizarem os detalhes clicando neles e fazer a compra por meio da plataforma de pagamento Stripe. Ela também tem uma página de sucesso que exibe os detalhes do que foi comprado.
+Este projeto é uma aplicação web desenvolvida em _Next.js_ e _TypeScript_ de uma loja on-line fictícia que exibe seus produtos na página inicial em formato de carrossel, possibilitando aos usuários visualizarem os detalhes clicando neles e fazer o pagamento pela Stripe. Ela também tem um carrinho de compras e uma página de sucesso que exibe os detalhes dos itens comprados.
 
-O objetivo do Ignite Shop é proporcionar uma experiência de compra amigável e visualmente atraente, integrando-se a um processador de pagamento popular para simplificar o processo de compra para os clientes.
+O objetivo do Ignite Shop V2 é proporcionar uma experiência de compra ainda mais amigável e visualmente atraente, agora com uma sacola para guardar múltiplos itens, integrando-se a um processador de pagamento popular para simplificar o processo de compra aos clientes.
 
 ## ✨ Funcionalidades
 
@@ -103,9 +103,13 @@ O objetivo do Ignite Shop é proporcionar uma experiência de compra amigável e
 
 👀 **Veja mais detalhes** clicando no produto desejado
 
-💳 **Escolha** o que desejar e **finalize o pagamento** pela Stripe (_apenas simbólico_)
+🛒 Adicione os itens que desejar ao **carrinho**
 
-🚚 Aguardar a compra chegar
+🔄 Seu **carrinho fica salvo** até você fechar o pedido, então pode atualizar a página sem medo
+
+💳**Faça o pagamento** pela Stripe (_apenas simbólico_)
+
+🚚 Aguardar as compras chegarem
 
 ## 🤖 Demo
 
@@ -273,11 +277,13 @@ npm install
 
 ### ⚙️ Utilização
 
-1. Acesse a sua conta da [Stripe](https://stripe.com/) e obtenha as suas [_API keys_](https://dashboard.stripe.com/test/apikeys)
+1. Acesse/crie a sua conta na [Stripe](https://stripe.com/)
 
-   - Confira a [documentação do Stripe](https://stripe.com/docs/keys) se for preciso
+   - Crie uma loja, produtos e faça toda a configuração necessária
 
-2. Renomeie o arquivo `.env.local.example` para `.env` e insira as informações necessárias:
+2. Obtenha as suas [_API keys_](https://dashboard.stripe.com/test/apikeys)
+
+3. Renomeie o arquivo `.env.local.example` para `.env` e insira as informações necessárias:
 
 ```sh
 mv .env.local.example .env

@@ -1,6 +1,6 @@
 {
   "name": "ignite-shop",
-  "description": "",
+  "description": "Web app for online clothing store with shopping cart and easy checkout",
   "private": true,
   "scripts": {
     "dev": "next dev",
