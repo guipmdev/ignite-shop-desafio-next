@@ -291,13 +291,13 @@ npm install
 mv .env.local.example .env
 ```
 
-3. Inicie a aplicação web:
+4. Inicie a aplicação web:
 
 ```sh
 npm run dev
 ```
 
-4. Acesse http://localhost:3000/ para visualizar a aplicação
+5. Acesse http://localhost:3000/ para visualizar a aplicação
 
 ## 📄 Licença
 
