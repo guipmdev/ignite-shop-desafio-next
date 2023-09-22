@@ -1,6 +1,6 @@
 {
-  "name": "ignite-nextjs-04-ignite-shop",
-  "version": "0.1.0",
+  "name": "ignite-shop",
+  "description": "",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -31,5 +31,19 @@
     "@next/eslint-plugin-next": "^13.4.10",
     "@rocketseat/eslint-config": "^2.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guipmdev/ignite-shop-v2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guipmdev/ignite-shop-v2/issues"
+  },
+  "author": {
+    "name": "Guilherme Preveda Milék",
+    "email": "guipmdev@gmail.com",
+    "url": "https://guipm.dev/"
+  },
+  "license": "MIT",
+  "homepage": "https://guipmdev-ignite-shop-v2.vercel.app/"
 }
