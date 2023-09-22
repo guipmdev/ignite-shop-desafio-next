@@ -113,6 +113,8 @@ O objetivo do Ignite Shop V2 é proporcionar uma experiência de compra ainda ma
 
 ## 🤖 Demo
 
+https://github.com/guipmdev/ignite-shop-v2/assets/136738335/fd45f116-53eb-426f-b6e9-aa328dadaa6f
+
 ## 🎨 Layout
 
 O layout da aplicação foi projetado pela **Rocketseat** e está disponível no [Figma](https://www.figma.com/file/nIkPaTxXF0NedsKjOaSdMq/Ignite-Shop-2.0-%E2%80%A2-Desafio-React).
