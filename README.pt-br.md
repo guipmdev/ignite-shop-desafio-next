@@ -285,7 +285,7 @@ npm install
 
 2. Obtenha as suas [_API keys_](https://dashboard.stripe.com/test/apikeys)
 
-3. Renomeie o arquivo `.env.local.example` para `.env` e insira as informações necessárias:
+3. Renomeie o arquivo `.env.local.example` para `.env.local` e insira as informações necessárias:
 
 ```sh
 mv .env.local.example .env
