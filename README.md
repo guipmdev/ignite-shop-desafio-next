@@ -288,7 +288,7 @@ npm install
 3. Rename the file `.env.local.example` to `.env.local` and insert the necessary information:
 
 ```sh
-mv .env.local.example .env
+mv .env.local.example .env.local
 ```
 
 4. Start the web application:
