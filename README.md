@@ -95,7 +95,7 @@
 
 This project is a web application developed in _Next.js_ and _TypeScript_ for a fictitious online store that displays its products on the home page in a carousel format, allowing users to view the details by clicking on them and make the payment via Stripe. It also has a shopping cart and a success page that displays the details of the items purchased.
 
-is to provide an even more user-friendly and visually appealing shopping experience, now with a shopping bag for storing multiple items, by integrating with a popular payment processor to simplify the purchasing experience for customers.
+The goal of Ignite Shop V2 is to provide an even more user-friendly and visually appealing shopping experience, now with a shopping bag for storing multiple items, by integrating with a popular payment processor to simplify the purchasing experience for customers.
 
 ## ✨ Features
 
